@@ -14,9 +14,10 @@ wine_reviews = pd.read_csv("data/winemag-data-130k-v2.csv.zip")
 
 #For each country create summary of the data that contains the name, number and reviews, and avg
 summary = wine_reviews.groupby('country').agg(
-    n_reviews=('country', 'size'),
-    avg_points=('points', 'mean')
+    count=('title', 'size'),
+    points=('points', 'mean')
 ).reset_index()
 
-summary['avg_points'] = summary['avg_points'].round(1)
+summary['points'] = summary['points'].round(1)
+
 summary.to_csv('data/reviews_per_country.csv', index=False)
